@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  app:
+    container_name: link-shortener-app
+    build: .
+    environment:
+      APP_ENV: 'local'
+      LOG_CHANNEL: 'stderr'
+      DB_HOST: 'link-shortener-mysql'
+      DB_PORT: 3306
+      MYSQL_DATABASE: ${DB_DATABASE:-app}
+      MYSQL_USER: ${DB_USER:-laravel}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      CACHE_DRIVER: 'redis'
+      REDIS_HOST: 'link-shortener-redis'
+      REDIS_PORT: 6379
+      VIRTUAL_HOST: ln.phlak.local
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./.docker/apache2/config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    restart: on-failure
+
+  mysql:
+    container_name: link-shortener-mysql
+    image: mysql:8.0
+    ports:
+      - ${DB_PORT:-3306}:3306
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: ${DB_DATABASE:-app}
+      MYSQL_USER: ${DB_USER:-laravel}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+    restart: on-failure
+
+  redis:
+    container_name: link-shortener-redis
+    image: redis:5.0
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    restart: on-failure
+
+networks:
+  default:
+    external:
+      name: development
