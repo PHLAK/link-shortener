@@ -15,8 +15,8 @@ class CreateLinksTable extends Migration
             $table->string('title', 256)->nullable();
             $table->string('url', 2048);
             $table->unsignedBigInteger('user_id');
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique('slug');
             $table->foreign('user_id')->references('id')->on('users');
