@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -23,16 +24,15 @@ class Link extends Model
         });
     }
 
-    /** Get the user that owns this link. */
+    /** Get the user that owns the link. */
     public function user(): BelongsTo
     {
         return $this->belongsto(User::class);
     }
 
-    /** Increment this link's hit counter by one. */
-    public function incrementHits(): void
+    /** Get the redirects for the link. */
+    public function redirects(): HasMany
     {
-        ++$this->hits;
-        $this->save();
+        return $this->hasMany(Redirect::class);
     }
 }

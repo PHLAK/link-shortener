@@ -6,6 +6,7 @@ use App\Models\Link;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class RedirectControllerTest extends TestCase
@@ -35,23 +36,30 @@ class RedirectControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_increments_hits_for_every_request(): void
+    public function it_creates_a_redirect_for_every_redirect_request(): void
     {
-        $link = Link::factory()->for(User::factory())->create([
-            'url' => 'https://example.test/foo/bar',
+        Carbon::setTestNow('1985-05-20 12:34:56');
+
+        $link = Link::factory()->for(User::factory())->create();
+
+        $this->assertCount(0, $link->redirects);
+
+        $this->get(route('redirect', ['link' => $link->slug]), [
+            'User-Agent' => 'Test user-agent; please ignore',
         ]);
 
-        $this->assertEquals(0, $link->hits);
-
-        $this->get(route('redirect', ['link' => $link->slug]));
-        $this->get(route('redirect', ['link' => $link->slug]));
-        $this->get(route('redirect', ['link' => $link->slug]));
-
-        $this->assertEquals(3, $link->refresh()->hits);
-
-        $this->assertDatabaseHas('links', [
-            'id' => $link->id,
-            'hits' => 3,
+        $this->assertCount(1, $link->refresh()->redirects);
+        $this->assertDatabaseCount('redirects', 1);
+        $this->assertDatabaseHas('redirects', [
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Test user-agent; please ignore',
+            'created_at' => '1985-05-20 12:34:56',
         ]);
+
+        $this->get(route('redirect', ['link' => $link->slug]));
+        $this->get(route('redirect', ['link' => $link->slug]));
+
+        $this->assertCount(3, $link->refresh()->redirects);
+        $this->assertDatabaseCount('redirects', 3);
     }
 }
