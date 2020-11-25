@@ -1,4 +1,4 @@
-FROM php:7.4-apache as application
+FROM php:7.4-apache
 LABEL maintainer="Chris Kankiewicz <Chris@ChrisKankiewicz.com>"
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
