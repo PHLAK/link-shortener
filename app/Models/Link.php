@@ -27,7 +27,7 @@ class Link extends Model
     /** Get the user that owns the link. */
     public function user(): BelongsTo
     {
-        return $this->belongsto(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /** Get the redirects for the link. */

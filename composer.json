@@ -27,6 +27,7 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^0.6.9",
         "phlak/coding-standards": "^1.1",
         "phpunit/phpunit": "^9.3.3"
     },
