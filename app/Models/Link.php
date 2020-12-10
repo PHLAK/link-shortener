@@ -35,4 +35,10 @@ class Link extends Model
     {
         return $this->hasMany(Redirect::class);
     }
+
+    /** Get the full URL for the short link */
+    public function shortLink(): string
+    {
+        return route('redirect', ['link' => $this]);
+    }
 }

@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', Controllers\DashboardController::class)->name('dashboard');
 
 Route::get('/{link:slug}', Controllers\RedirectController::class)
     ->where('link', '^(?!nova).*$')->name('redirect');
