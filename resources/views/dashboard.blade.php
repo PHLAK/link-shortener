@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto px-4 space-y-2 sm:px-6 lg:px-8">
-            @foreach ($links as $link)
+            @foreach ($links->load('redirects') as $link)
                 <div class="flex justify-between items-center bg-white rounded-lg shadow p-4">
                     <h3 class="font-montserrat font-thin text-lg">
                         {{ $link->title ?? $link->slug }}
