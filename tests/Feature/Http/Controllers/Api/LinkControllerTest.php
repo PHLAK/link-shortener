@@ -50,7 +50,6 @@ class LinkControllerTest extends TestCase
                 'slug' => 'test-slug-please-ignore',
                 'title' => 'Test link; please ignore',
                 'url' => 'https://example.test/foo/bar',
-                'hits' => 0,
                 'user_id' => $link->user->id,
             ]);
     }
