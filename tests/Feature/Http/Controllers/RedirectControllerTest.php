@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
+/** @covers \App\Http\Controllers\RedirectController */
 class RedirectControllerTest extends TestCase
 {
     use RefreshDatabase;

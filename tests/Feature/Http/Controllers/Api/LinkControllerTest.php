@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
+/** @covers \App\Http\Controllers\Api\LinkController */
 class LinkControllerTest extends TestCase
 {
     use RefreshDatabase;
