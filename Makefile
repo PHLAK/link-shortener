@@ -1,11 +1,13 @@
+COMPOSER_BIN := $$(whereis -B /usr/local/bin /user/bin -f composer | awk '{ print $$2 }')
+
 all: dev env # Install and build dependencies and bring up the dev environment
 
 dev development: # Install and build application developemnt dependencies
-	@composer install --no-interaction
+	@$(COMPOSER_BIN) install --no-interaction
 	@npm install && npm run dev
 
 prod production: # Install and build application production dependencies
-	@composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+	@$(COMPOSER_BIN) install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 	@npm install --no-save && npm run production && npm prune --production
 
 env environment: # Bring up the development environment
@@ -14,7 +16,7 @@ env environment: # Bring up the development environment
 	@php artisan migrate:fresh --seed
 
 update upgrade: # Update application dependencies and publish dependency assets
-	@composer update && php artisan nova:publish && php artisan telescope:publish
+	@$(COMPOSER_BIN) update && php artisan nova:publish && php artisan telescope:publish
 	@npm update && npm install && npm audit fix
 
 analyze: # Run coding standards and static analysis checks
