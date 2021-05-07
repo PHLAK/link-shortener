@@ -1,24 +1,26 @@
 {
-    "name": "laravel/laravel",
+    "name": "phlak/link-shortener",
+    "description": "A custom link shortener by Chris Kankiewicz",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Kankiewicz",
+            "email": "Chris@ChrisKankiewicz.com"
+        }
+    ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
-        "laravel/jetstream": "^1.6",
+        "laravel/jetstream": "^2.3",
+        "laravel/nova": "^3.0",
         "laravel/sanctum": "^2.6",
         "laravel/telescope": "^4.3",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.0",
-        "laravel/nova": "^3.0"
+        "livewire/livewire": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
@@ -28,7 +30,7 @@
         "laravel/sail": "^0.0.10",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "nunomaduro/larastan": "^0.6.9",
+        "nunomaduro/larastan": "^0.7.5",
         "phlak/coding-standards": "^1.1",
         "phpunit/phpunit": "^9.3.3"
     },
