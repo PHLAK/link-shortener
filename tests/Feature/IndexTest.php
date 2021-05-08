@@ -16,6 +16,6 @@ class IndexTest extends TestCase
 
         $response
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee('PHLAK Links');
+            ->assertViewIs('index');
     }
 }
