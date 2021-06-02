@@ -8,21 +8,13 @@ use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
+    /** Register any application services. */
     public function register()
     {
-        //
+
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
+    /** Bootstrap any application services. */
     public function boot()
     {
         $this->configurePermissions();
@@ -30,11 +22,7 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 
-    /**
-     * Configure the permissions that are available within the application.
-     *
-     * @return void
-     */
+    /** Configure the permissions that are available within the application. */
     protected function configurePermissions()
     {
         Jetstream::defaultApiTokenPermissions(['read']);
